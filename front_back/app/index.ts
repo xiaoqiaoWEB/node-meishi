@@ -3,11 +3,14 @@
 //import * as koa from 'koa'
 
 import Koa = require('koa')
+import { useControllers } from 'koa-controllers';
 
 let app = new Koa ();
 
-app.use(async ctx=>{
-    ctx.body = "hello koa typescript";
-})
+useControllers(app, __dirname + '/controllers/**/*.controllers.js', {
+    multipart: {
+        dest: './uploads'
+    }
+});
 
 app.listen(8888);
